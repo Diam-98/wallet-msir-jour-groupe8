@@ -3,6 +3,7 @@ package com.wallet_app.walette_app.models;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -10,22 +11,29 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(mappedBy = "user")
-    private User userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private String accountId;
-    private Double sold;
+    private Double balance;
     private Date creationDate;
-    private Double limit;
+    private Double accountLimit;
+
+    @OneToMany(mappedBy = "senderAccount")
+    private List<Transaction> outgoingTransactions;
+
+    @OneToMany(mappedBy = "receiverAccount")
+    private List<Transaction> incomingTransactions;
 
     public Account() {
     }
 
-    public Account(User userId, String accountId, Double sold, Date creationDate, Double limit) {
-        this.userId = userId;
+    public Account(User user, String accountId, Double balance, Date creationDate, Double accountLimit) {
+        this.user = user;
         this.accountId = accountId;
-        this.sold = sold;
+        this.balance = balance;
         this.creationDate = creationDate;
-        this.limit = limit;
+        this.accountLimit = accountLimit;
     }
 
     public Long getId() {
@@ -33,11 +41,11 @@ public class Account {
     }
 
     public User getUserId() {
-        return userId;
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserId(User user) {
+        this.user = user;
     }
 
     public String getAccountId() {
@@ -49,11 +57,11 @@ public class Account {
     }
 
     public Double getSold() {
-        return sold;
+        return balance;
     }
 
-    public void setSold(Double sold) {
-        this.sold = sold;
+    public void setSold(Double balance) {
+        this.balance = balance;
     }
 
     public Date getCreationDate() {
@@ -65,10 +73,10 @@ public class Account {
     }
 
     public Double getLimit() {
-        return limit;
+        return accountLimit;
     }
 
-    public void setLimit(Double limit) {
-        this.limit = limit;
+    public void setLimit(Double accountLimit) {
+        this.accountLimit = accountLimit;
     }
 }

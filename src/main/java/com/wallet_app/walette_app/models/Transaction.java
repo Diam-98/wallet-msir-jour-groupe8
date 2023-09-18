@@ -11,37 +11,39 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(mappedBy = "account")
-    private Account senderAccountId;
-    @OneToOne(mappedBy = "account")
-    private Account receiverAccountId;
+    @ManyToOne
+    @JoinColumn(name = "sender_account_id")
+    private Account senderAccount;
+    @ManyToOne
+    @JoinColumn(name = "receiver_account_id")
+    private Account receiverAccount;
     private Double amount;
     private Date transactionDate;
 
     public Transaction() {
     }
 
-    public Transaction(Account senderAccountId, Account receiverAccountId, Double amount, Date transactionDate) {
-        this.senderAccountId = senderAccountId;
-        this.receiverAccountId = receiverAccountId;
+    public Transaction(Account senderAccount, Account receiverAccount, Double amount, Date transactionDate) {
+        this.senderAccount = senderAccount;
+        this.receiverAccount = receiverAccount;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
-    public Account getSenderAccountId() {
-        return senderAccountId;
+    public Account getSenderAccount() {
+        return senderAccount;
     }
 
-    public void setSenderAccountId(Account senderAccountId) {
-        this.senderAccountId = senderAccountId;
+    public void setSenderAccount(Account senderAccount) {
+        this.senderAccount = senderAccount;
     }
 
-    public Account getReceiverAccountId() {
-        return receiverAccountId;
+    public Account getReceiverAccount() {
+        return receiverAccount;
     }
 
-    public void setReceiverAccountId(Account receiverAccountId) {
-        this.receiverAccountId = receiverAccountId;
+    public void setReceiverAccountId(Account receiverAccount) {
+        this.receiverAccount = receiverAccount;
     }
 
     public Long getId() {

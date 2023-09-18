@@ -14,6 +14,10 @@ public class User {
     private String phone;
     private String gender;
 
+    @OneToOne(mappedBy = "user")
+    @MapsId
+    private Account account;
+
     public User() {
     }
 
@@ -76,5 +80,13 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
