@@ -1,6 +1,7 @@
 package com.wallet_app.walette_app.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 public class User {
@@ -15,7 +16,7 @@ public class User {
     private String gender;
 
     @OneToOne(mappedBy = "user")
-    @MapsId
+    @ColumnDefault("null")
     private Account account;
 
     public User() {
