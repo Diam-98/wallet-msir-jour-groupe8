@@ -11,56 +11,48 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @OneToOne(mappedBy = "account")
     private User user;
-    private String accountId;
+    private String accountNumber;
     private Double balance;
     private Date creationDate;
-    private Double accountLimit;
 
     @OneToMany(mappedBy = "senderAccount")
-    private List<Transaction> outgoingTransactions;
+    private List<Transfer> outgoingTransfers;
 
     @OneToMany(mappedBy = "receiverAccount")
-    private List<Transaction> incomingTransactions;
+    private List<Transfer> incomingTransfers;
+
+    @OneToMany(mappedBy = "account")
+    private List<Deposit> deposits;
+
+    @OneToMany(mappedBy = "account")
+    private List<Withdraw> withdraws;
 
     public Account() {
     }
 
-    public Account(User user, String accountId, Double balance, Date creationDate, Double accountLimit) {
-        this.user = user;
-        this.accountId = accountId;
-        this.balance = balance;
-        this.creationDate = creationDate;
-        this.accountLimit = accountLimit;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getUserId() {
+    public User getUser() {
         return user;
     }
 
-    public void setUserId(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
-    public Double getSold() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setSold(Double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -72,11 +64,35 @@ public class Account {
         this.creationDate = creationDate;
     }
 
-    public Double getLimit() {
-        return accountLimit;
+    public List<Transfer> getOutgoingTransfers() {
+        return outgoingTransfers;
     }
 
-    public void setLimit(Double accountLimit) {
-        this.accountLimit = accountLimit;
+    public void setOutgoingTransfers(List<Transfer> outgoingTransfers) {
+        this.outgoingTransfers = outgoingTransfers;
+    }
+
+    public List<Transfer> getIncomingTransfers() {
+        return incomingTransfers;
+    }
+
+    public void setIncomingTransfers(List<Transfer> incomingTransfers) {
+        this.incomingTransfers = incomingTransfers;
+    }
+
+    public List<Deposit> getDeposits() {
+        return deposits;
+    }
+
+    public void setDeposits(List<Deposit> deposits) {
+        this.deposits = deposits;
+    }
+
+    public List<Withdraw> getWithdraws() {
+        return withdraws;
+    }
+
+    public void setWithdraws(List<Withdraw> withdraws) {
+        this.withdraws = withdraws;
     }
 }

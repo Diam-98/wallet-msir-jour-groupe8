@@ -2,6 +2,8 @@ package com.wallet_app.walette_app.models;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class User {
     @Id
@@ -14,9 +16,12 @@ public class User {
     private String phone;
     private String gender;
 
-    @OneToOne(mappedBy = "user")
-    @MapsId
+    @OneToOne
     private Account account;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public User() {
     }
@@ -88,5 +93,13 @@ public class User {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

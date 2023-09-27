@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-public class Transaction {
+public class Transfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,10 +20,10 @@ public class Transaction {
     private Double amount;
     private Date transactionDate;
 
-    public Transaction() {
+    public Transfer() {
     }
 
-    public Transaction(Account senderAccount, Account receiverAccount, Double amount, Date transactionDate) {
+    public Transfer(Account senderAccount, Account receiverAccount, Double amount, Date transactionDate) {
         this.senderAccount = senderAccount;
         this.receiverAccount = receiverAccount;
         this.amount = amount;
