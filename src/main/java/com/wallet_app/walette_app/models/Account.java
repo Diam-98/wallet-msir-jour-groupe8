@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 public class Account {
@@ -17,7 +18,6 @@ public class Account {
     private String accountId;
     private Double balance;
     private Date creationDate;
-    private Double accountLimit;
 
     @OneToMany(mappedBy = "senderAccount")
     private List<Transaction> outgoingTransactions;
@@ -28,23 +28,20 @@ public class Account {
     public Account() {
     }
 
-    public Account(User user, String accountId, Double balance, Date creationDate, Double accountLimit) {
+    public Account(User user, String accountId, Double balance, Date creationDate, List<Transaction> outgoingTransactions, List<Transaction> incomingTransactions) {
         this.user = user;
         this.accountId = accountId;
         this.balance = balance;
         this.creationDate = creationDate;
-        this.accountLimit = accountLimit;
+        this.outgoingTransactions = outgoingTransactions;
+        this.incomingTransactions = incomingTransactions;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public User getUserId() {
+    public User getUser() {
         return user;
     }
 
-    public void setUserId(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -56,11 +53,11 @@ public class Account {
         this.accountId = accountId;
     }
 
-    public Double getSold() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setSold(Double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
@@ -72,11 +69,19 @@ public class Account {
         this.creationDate = creationDate;
     }
 
-    public Double getLimit() {
-        return accountLimit;
+    public List<Transaction> getOutgoingTransactions() {
+        return outgoingTransactions;
     }
 
-    public void setLimit(Double accountLimit) {
-        this.accountLimit = accountLimit;
+    public void setOutgoingTransactions(List<Transaction> outgoingTransactions) {
+        this.outgoingTransactions = outgoingTransactions;
+    }
+
+    public List<Transaction> getIncomingTransactions() {
+        return incomingTransactions;
+    }
+
+    public void setIncomingTransactions(List<Transaction> incomingTransactions) {
+        this.incomingTransactions = incomingTransactions;
     }
 }
