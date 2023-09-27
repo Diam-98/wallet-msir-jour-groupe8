@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private AccountService accountService;
-    private UserService userService;
+    private final AccountService accountService;
+    private final UserService userService;
 
     @Autowired
     public UserController(UserService userService, AccountService accountService) {
