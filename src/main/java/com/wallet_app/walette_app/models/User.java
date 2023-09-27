@@ -31,6 +31,20 @@ public class User {
         this.gender = gender;
     }
 
+    public User(Long id, String firstName, String lastName, String email, String password, String phone, String gender) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.gender = gender;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
