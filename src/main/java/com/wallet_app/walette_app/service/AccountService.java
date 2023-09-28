@@ -38,7 +38,7 @@ public class AccountService {
         }
     }
 
-    public void createAccount(User user){
+    public Account createAccount(User user){
 
         Account account = new Account();
         account.setBalance(0.0);
@@ -46,7 +46,7 @@ public class AccountService {
         account.setAccountId("CPT-" + UUID.randomUUID().toString().replace("-", ""));
         account.setUser(user);
 
-        accountRepository.save(account);
+        return accountRepository.save(account);
     }
 
     public double viewSold(User user){

@@ -1,5 +1,6 @@
 package com.wallet_app.walette_app.controllers;
 
+import com.wallet_app.walette_app.models.Account;
 import com.wallet_app.walette_app.models.User;
 import com.wallet_app.walette_app.service.AccountService;
 import com.wallet_app.walette_app.service.UserService;
@@ -32,12 +33,12 @@ public class AccountController {
             @ApiResponse(responseCode = "200", description = "Compte cree avec succes"),
     })
     @PostMapping("/create/{userId}")
-    public ResponseEntity<?> createAccount(@PathVariable Long userId){
+    public ResponseEntity<Account> createAccount(@PathVariable Long userId){
         User user = userService.findUser(userId);
 
-        accountService.createAccount(user);
+        Account account = accountService.createAccount(user);
 
-        return new ResponseEntity<>("Compte cree avec succes",HttpStatus.OK);
+        return new ResponseEntity<>(account,HttpStatus.OK);
     }
 
     @Operation(summary = "Verification de solde d'un compte a l'aide du userId", description = "Retourne le sode du compte du user")
